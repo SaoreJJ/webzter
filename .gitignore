@@ -209,3 +209,37 @@ __pycache__
 sqlite
 env
 students
+# Django
+
+media/
+
+# IDE
+
+.vscode/
+*.swp
+*.swo
+
+# Virtual environment
+
+
+# OS
+
+Thumbs.db
+
+# Python
+*.py[cod]
+
+
+# Database
+*.db
+*.sqlite3
+
+# Coverage
+
+htmlcov/
+
+# PyCharm
+
+*.iml
+
+# VS Code
