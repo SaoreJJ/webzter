@@ -1,3 +1,23 @@
 from django.contrib import admin
+from .models import Category, Product
 
-# Register your models here.
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    search_fields = ('name', 'description')
+    list_filter = ('name',)
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'price', 'category', 'created_at')
+    list_filter = ('category', 'created_at')
+    search_fields = ('name', 'description')
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'description', 'category', 'price')
+        }),
+        ('Дополнительно', {
+            'fields': ('image',),
+            'classes': ('collapse',)
+        }),
+    )

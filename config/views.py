@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import Product, Category
+from .models import Product, Category, Contact
 
 
 def home(request):
@@ -16,6 +16,13 @@ def home(request):
     return render(request, 'catalog/home.html', context)
 
 
+# ДОБАВИТЬ ЭТУ ФУНКЦИЮ
 def contacts(request):
     """Контроллер страницы контактов"""
-    return render(request, 'catalog/contacts.html')
+    contacts_list = Contact.objects.all().order_by('-created_at')
+
+    context = {
+        'contacts': contacts_list,
+        'title': 'Контакты'
+    }
+    return render(request, 'catalog/contacts.html', context)

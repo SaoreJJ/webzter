@@ -243,3 +243,5 @@ htmlcov/
 *.iml
 
 # VS Code
+
+.env.example

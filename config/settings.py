@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -61,13 +62,24 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 
 
+load_dotenv(BASE_DIR / '.env')
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': os.getenv('DB_NAME', 'catalog_db'),
+#        'USER': os.getenv('DB_USER', 'postgres'),
+#        'PASSWORD': os.getenv('DB_PASSWORD', '892513'),
+#        'HOST': os.getenv('DB_HOST', 'localhost'),
+#        'PORT': os.getenv('DB_PORT', '5432'),
+#    }
+#}
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 
 
@@ -115,6 +127,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_USE_TLS = True
 # EMAIL_HOST_USER = 'your-email@yandex.ru'
 # EMAIL_HOST_PASSWORD = 'your-password'
+
 
 
 
