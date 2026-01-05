@@ -1,0 +1,26 @@
+[
+{
+  "model": "catalog.category",
+  "pk": 1,
+  "fields": {
+    "name": "Ёлектроника",
+    "description": "Ёлектронные устройства"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 2,
+  "fields": {
+    "name": " ниги",
+    "description": "Ћитература различных жанров"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 3,
+  "fields": {
+    "name": "ќдежда",
+    "description": "ћужска€ и женска€ одежда"
+  }
+}
+]
