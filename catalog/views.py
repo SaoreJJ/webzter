@@ -1,21 +1,29 @@
-from django.shortcuts import render, redirect
-from django.contrib import messages
+from django.shortcuts import render, get_object_or_404
 from .models import Product, Category
 
 
 def home(request):
     """Контроллер главной страницы"""
-    latest_products = Product.objects.all().order_by('-created_at')[:5]
-    print("Последние 5 продуктов:")
-    for product in latest_products:
-        print(f"- {product.name}: {product.price} руб.")
+    products = Product.objects.all().order_by('-created_at')
 
     context = {
-        'latest_products': latest_products,
+        'products': products,
+        'title': 'Каталог товаров',
     }
     return render(request, 'catalog/home.html', context)
 
 
 def contacts(request):
     """Контроллер страницы контактов"""
-    return render(request, 'catalog/contacts.html')
+    context = {'title': 'Контакты'}
+    return render(request, 'catalog/contacts.html', context)
+
+
+def product_detail(request, pk):
+    """Контроллер страницы одного товара"""
+    product = get_object_or_404(Product, pk=pk)
+    context = {
+        'product': product,
+        'title': product.name,
+    }
+    return render(request, 'catalog/product_detail.html', context)
