@@ -1,29 +1,38 @@
-from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, DetailView, TemplateView
+from django.shortcuts import get_object_or_404
 from .models import Product, Category
 
 
-def home(request):
-    """Контроллер главной страницы"""
-    products = Product.objects.all().order_by('-created_at')
+# Главная страница (ранее home)
+class ProductListView(ListView):
+    model = Product
+    template_name = 'catalog/home.html'
+    context_object_name = 'products'
+    ordering = ['-created_at']
 
-    context = {
-        'products': products,
-        'title': 'Каталог товаров',
-    }
-    return render(request, 'catalog/home.html', context)
-
-
-def contacts(request):
-    """Контроллер страницы контактов"""
-    context = {'title': 'Контакты'}
-    return render(request, 'catalog/contacts.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Каталог товаров'
+        return context
 
 
-def product_detail(request, pk):
-    """Контроллер страницы одного товара"""
-    product = get_object_or_404(Product, pk=pk)
-    context = {
-        'product': product,
-        'title': product.name,
-    }
-    return render(request, 'catalog/product_detail.html', context)
+# Страница товара (ранее product_detail)
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'catalog/product_detail.html'
+    context_object_name = 'product'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.object.name
+        return context
+
+
+# Страница контактов (ранее contacts) - TemplateView
+class ContactsView(TemplateView):
+    template_name = 'catalog/contacts.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Контакты'
+        return context
