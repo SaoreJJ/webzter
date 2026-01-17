@@ -1,0 +1,49 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}{% if form.instance.pk %}Изменить статью{% else %}Добавить статью{% endif %}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">{% if form.instance.pk %}Изменить статью{% else %}Добавить статью{% endif %}</h1>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="id_title" class="form-label">Заголовок</label>
+            {{ form.title }}
+        </div>
+        
+        <div class="mb-3">
+            <label for="id_content" class="form-label">Содержимое</label>
+            {{ form.content }}
+        </div>
+        
+        <div class="mb-3">
+            <label for="id_preview" class="form-label">Превью (изображение)</label>
+            {{ form.preview }}
+        </div>
+        
+        <div class="mb-3 form-check">
+            {{ form.is_published }}
+            <label class="form-check-label" for="id_is_published">Опубликовано</label>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a href="{% url 'blog:post_list' %}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+
+<style>
+    #id_title, #id_content, #id_preview {
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        border: 1px solid #ced4da;
+        border-radius: 0.375rem;
+    }
+    
+    #id_content {
+        min-height: 200px;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,62 @@
+<!-- catalog/templates/catalog/contacts.html -->
+{% extends 'catalog/base.html' %}
+
+{% block title %}Контакты{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">Контакты</h1>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">Наши контакты</h3>
+                    <table class="table">
+                        <tr>
+                            <th>Адрес:</th>
+                            <td>г. Москва, ул. Примерная, д. 123</td>
+                        </tr>
+                        <tr>
+                            <th>Телефон:</th>
+                            <td>+7 (999) 123-45-67</td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td>info@shop.ru</td>
+                        </tr>
+                        <tr>
+                            <th>Режим работы:</th>
+                            <td>Пн-Пт: 9:00-18:00, Сб-Вс: 10:00-16:00</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Обратная связь</h3>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Ваше имя</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Сообщение</label>
+                            <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
